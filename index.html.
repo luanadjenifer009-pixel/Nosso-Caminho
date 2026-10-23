@@ -1,157 +1,189 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10152f">
-<title>Uma história para Richard 💗</title>
-<style>
-*{box-sizing:border-box}
-body{
- margin:0;min-height:100vh;overflow-x:hidden;
- display:flex;align-items:center;justify-content:center;
- padding:20px 12px;
- font-family:Georgia,serif;color:#fff0fa;
- background:linear-gradient(180deg,#080d20,#171832 58%,#342444);
-}
-#sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
-.star{position:absolute;color:#fff2ce;animation:twinkle 2.5s infinite alternate}
-@keyframes twinkle{from{opacity:.25}to{opacity:1}}
-.float{position:absolute;bottom:-40px;color:#f4a9d0;animation:floatUp linear infinite}
-@keyframes floatUp{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
-.card{
- position:relative;z-index:2;width:min(100%,430px);
- padding:28px 23px 22px;border:1px solid #e6b8dc66;
- border-radius:26px;text-align:center;
- background:rgba(14,17,42,.94);
- box-shadow:0 18px 65px #0006,0 0 35px #b77aff18;
- animation:appear .6s ease;
-}
-@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.scene{height:94px;display:flex;align-items:center;justify-content:center;font-size:48px;gap:12px}
-.label{font:11px Arial,sans-serif;letter-spacing:2px;color:#cbb8eb;margin:8px 0 12px}
-h1{font-size:clamp(25px,7vw,32px);line-height:1.2;font-weight:normal;color:#ffd5eb;margin:8px 0 18px}
-.message{font-size:17px;line-height:1.8;color:#f4eaf5;white-space:pre-line;margin:0 0 20px}
-button{font-size:14px;font-weight:bold;border:0;border-radius:28px;padding:13px 18px;margin:5px;min-height:44px;cursor:pointer}
-#next{background:linear-gradient(135deg,#ffd0e6,#dca5d7);color:#35172f}
-#back{background:#343451;color:#fff}
-.hidden{display:none!important}
-#progress{font:12px Arial,sans-serif;color:#c9bbdd;margin-top:17px}
-.dots{display:flex;justify-content:center;gap:7px;margin-top:13px}
-.dot{width:6px;height:6px;border-radius:50%;background:#635774}
-.dot.active{background:#ffd1e8;box-shadow:0 0 8px #ffd1e8}
-@media(max-height:650px){.card{padding:17px}.scene{height:60px;font-size:36px}.message{font-size:15px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d24">
+  <title>Nosso Caminho 💗</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: Georgia, serif;
+      color: #fff0fa;
+      background:
+        radial-gradient(ellipse at top, #34335e 0%, transparent 55%),
+        linear-gradient(180deg, #080d20, #17162f 65%, #382443);
+    }
+
+    #ceu {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .estrela {
+      position: absolute;
+      color: #fff0c9;
+      animation: brilhar 2s infinite alternate;
+    }
+
+    @keyframes brilhar {
+      from { opacity: .2; }
+      to { opacity: 1; }
+    }
+
+    .coracao {
+      position: absolute;
+      bottom: -40px;
+      color: #ffb6d8;
+      animation: subir linear infinite;
+    }
+
+    @keyframes subir {
+      to {
+        transform: translateY(-115vh) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    .cartao {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 400px;
+      padding: 32px 22px;
+      text-align: center;
+      border: 1px solid #f7c7e866;
+      border-radius: 26px;
+      background: rgba(14, 16, 40, .94);
+      box-shadow: 0 0 45px #d77bc526;
+      animation: aparecer .8s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lua {
+      font-size: 54px;
+      margin-bottom: 15px;
+    }
+
+    .subtitulo {
+      color: #d9bce9;
+      font: 11px Arial, sans-serif;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      color: #ffd5eb;
+      font-size: 34px;
+      margin: 18px 0 12px;
+      font-weight: normal;
+    }
+
+    .texto {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #f2e7f4;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ffd3e7, #dba5e2);
+      color: #35172f;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(.96);
+    }
+
+    .rodape {
+      color: #cbb7db;
+      font-size: 12px;
+      margin-top: 22px;
+    }
+  </style>
 </head>
+
 <body>
-<div id="sky"></div>
-<main class="card" id="card">
- <div class="scene" id="scene">🌙 ✦ 🌷</div>
- <div class="label" id="label">UMA CARTINHA PARA VOCÊ</div>
- <h1 id="title">Oi, meu amor…</h1>
- <p class="message" id="message">Fiz uma coisinha para você.
-Não é um jogo qualquer.
-É um pedacinho do meu coração. 💗</p>
- <div>
-  <button id="back" class="hidden" type="button">← Voltar</button>
-  <button id="next" type="button">Abrir minha cartinha 💌</button>
- </div>
- <div class="dots" id="dots"></div>
- <div id="progress">Uma história feita com amor 🌷</div>
-</main>
-<script>
-(function(){
-"use strict";
-const slides=[
-{
-emoji:"🌙",decor:"✦",label:"PARA O MEU RICHARD",
-title:"Oi, meu amor…",
-text:"Fiz uma coisinha para você.\nNão é um jogo qualquer.\nÉ um pedacinho do meu coração. 💗",
-button:"Abrir minha cartinha 💌"
-},
-{
-emoji:"☁️",decor:"☾",label:"DEPOIS DA TEMPESTADE",
-title:"Se eu pudesse voltar…",
-text:"Eu voltaria àquele momento só para tentar fazer diferente.\n\nÀs vezes, no meio de uma discussão, esquecemos que estamos falando justamente com alguém que amamos tanto.",
-button:"Continuar…"
-},
-{
-emoji:"🥀",decor:"✧",label:"UMA VERDADE DO MEU CORAÇÃO",
-title:"Eu reconheço meus erros",
-text:"Sinto muito pelas vezes em que minhas atitudes te machucaram.\n\nNão quero continuar repetindo os mesmos erros. Quero aprender, amadurecer e mostrar com atitudes que estou tentando ser melhor.",
-button:"Tem mais uma coisa…"
-},
-{
-emoji:"💗",decor:"♡",label:"O QUE EU QUERO QUE VOCÊ SAIBA",
-title:"Eu amo você",
-text:"Mesmo quando as coisas ficam difíceis, meu amor por você não é algo que eu queira transformar em dor.\n\nQuero que a gente aprenda a conversar, a se entender e a cuidar melhor um do outro.",
-button:"Continuar 💌"
-},
-{
-emoji:"🌌",decor:"✦",label:"NOSSA PRÓXIMA FASE",
-title:"Dois corações, dois caminhos",
-text:"Imagine que estamos em lados diferentes de um mundo escuro.\n\nVocê está aí, e eu estou aqui, os dois com saudade e vontade de ficar bem.\n\nAgora você tem uma missão: encontrar o caminho até mim. 🌷",
-button:"Ver nossa missão 🎮"
-},
-{
-emoji:"🌅",decor:"☀️",label:"A PRÓXIMA PARTE VEM AÍ",
-title:"Nosso caminho continua…",
-text:"Os primeiros slides terminaram, meu amor. 💗\n\nNa próxima fase, você vai controlar seu personagem, atravessar os obstáculos e encontrar a Luana. Quando vocês se encontrarem, a noite vai se transformar em um dia lindo. ☀️",
-button:"Ler novamente ↺"
-}
-];
-let index=0;
-const $=id=>document.getElementById(id);
-function render(){
- const s=slides[index];
- $("scene").textContent=s.emoji+" "+s.decor+" ♡";
- $("label").textContent=s.label;
- $("title").textContent=s.title;
- $("message").textContent=s.text;
- $("next").textContent=s.button;
- $("back").classList.toggle("hidden",index===0);
- $("progress").textContent="Página "+(index+1)+" de "+slides.length+" · Feito com amor 🌷";
- $("dots").innerHTML="";
- slides.forEach((_,i)=>{
-  const d=document.createElement("span");
-  d.className="dot"+(i===index?" active":"");
-  $("dots").appendChild(d);
- });
- const card=$("card");
- card.style.animation="none";
- void card.offsetWidth;
- card.style.animation="appear .6s ease";
-}
-$("next").addEventListener("click",()=>{
- index=index===slides.length-1?0:index+1;
- render();
-});
-$("back").addEventListener("click",()=>{
- if(index>0){index--;render();}
-});
-const sky=$("sky");
-for(let i=0;i<70;i++){
- const e=document.createElement("span");
- e.className="star";
- e.textContent=Math.random()>.5?"✦":"·";
- e.style.left=Math.random()*100+"%";
- e.style.top=Math.random()*100+"%";
- e.style.fontSize=7+Math.random()*13+"px";
- e.style.animationDelay=Math.random()*3+"s";
- sky.appendChild(e);
-}
-for(let i=0;i<12;i++){
- const e=document.createElement("span");
- e.className="float";
- e.textContent=["♡","♥","✧","🌸"][i%4];
- e.style.left=Math.random()*100+"%";
- e.style.animationDelay=Math.random()*9+"s";
- e.style.animationDuration=8+Math.random()*7+"s";
- e.style.fontSize=13+Math.random()*13+"px";
- sky.appendChild(e);
-}
-render();
-})();
-</script>
+  <div id="ceu"></div>
+
+  <main class="cartao">
+    <div class="lua">🌙 ✨ 🌷</div>
+
+    <div class="subtitulo">UMA HISTÓRIA DE AMOR</div>
+
+    <h1>Nosso Caminho</h1>
+
+    <p class="texto">
+      Dois corações.<br>
+      Uma história.<br>
+      E um caminho para encontrar o amor. 💗
+    </p>
+
+    <button id="comecar">
+      Começar nossa história 💌
+    </button>
+
+    <div class="rodape">
+      Feito com carinho, para o meu Richard ♡
+    </div>
+  </main>
+
+  <script>
+    const ceu = document.getElementById("ceu");
+
+    for (let i = 0; i < 65; i++) {
+      const estrela = document.createElement("span");
+      estrela.className = "estrela";
+      estrela.textContent = Math.random() > 0.5 ? "✦" : "·";
+      estrela.style.left = Math.random() * 100 + "%";
+      estrela.style.top = Math.random() * 100 + "%";
+      estrela.style.fontSize = (8 + Math.random() * 12) + "px";
+      estrela.style.animationDelay = Math.random() * 3 + "s";
+      ceu.appendChild(estrela);
+    }
+
+    for (let i = 0; i < 14; i++) {
+      const coracao = document.createElement("span");
+      coracao.className = "coracao";
+      coracao.textContent = ["♡", "♥", "✧", "🌸"][i % 4];
+      coracao.style.left = Math.random() * 100 + "%";
+      coracao.style.animationDelay = Math.random() * 10 + "s";
+      coracao.style.animationDuration = (8 + Math.random() * 8) + "s";
+      ceu.appendChild(coracao);
+    }
+
+    document.getElementById("comecar").addEventListener("click", function() {
+      alert("Nossa história está apenas começando, meu amor! 💗");
+    });
+  </script>
 </body>
 </html>
