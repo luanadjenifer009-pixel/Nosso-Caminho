@@ -1,146 +1,157 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10152f">
 <title>Uma história para Richard 💗</title>
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;min-height:100vh;overflow:hidden;
-  font-family:Georgia,serif;color:#fff1fa;
-  background:radial-gradient(ellipse at bottom,#29234b,#090d20 75%);
-  display:flex;align-items:center;justify-content:center;
-  transition:background 2s;
+ margin:0;min-height:100vh;overflow-x:hidden;
+ display:flex;align-items:center;justify-content:center;
+ padding:20px 12px;
+ font-family:Georgia,serif;color:#fff0fa;
+ background:linear-gradient(180deg,#080d20,#171832 58%,#342444);
 }
-.stars{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.star{position:absolute;color:#fff5d7;animation:twinkle 2s infinite alternate}
-@keyframes twinkle{from{opacity:.2}to{opacity:1}}
-.heart{position:fixed;bottom:-30px;animation:float 8s linear infinite;opacity:.6}
-@keyframes float{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+#sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.star{position:absolute;color:#fff2ce;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{from{opacity:.25}to{opacity:1}}
+.float{position:absolute;bottom:-40px;color:#f4a9d0;animation:floatUp linear infinite}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
 .card{
-  position:relative;z-index:2;width:min(90%,420px);
-  padding:32px 24px;border:1px solid #d4a8d866;
-  border-radius:25px;text-align:center;
-  background:#11152bd9;box-shadow:0 0 45px #b77aff22;
-  animation:appear 1s;
+ position:relative;z-index:2;width:min(100%,430px);
+ padding:28px 23px 22px;border:1px solid #e6b8dc66;
+ border-radius:26px;text-align:center;
+ background:rgba(14,17,42,.94);
+ box-shadow:0 18px 65px #0006,0 0 35px #b77aff18;
+ animation:appear .6s ease;
 }
-@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-.moon{font-size:48px;margin-bottom:12px}
-h1{font-size:27px;font-weight:normal;color:#ffd6eb}
-p{font-size:17px;line-height:1.8;color:#f0e5f3;white-space:pre-line}
-.small{font-size:12px;letter-spacing:3px;color:#c7b4e7}
-button{
-  border:0;border-radius:30px;padding:13px 22px;margin:8px 3px;
-  font-size:15px;cursor:pointer;
-  background:#e9b5d0;color:#35152c;
-}
-button:active{transform:scale(.96)}
-#back{background:#34324f;color:#fff}
-#progress{font-size:12px;color:#c3b3d7;margin-top:18px}
-.hidden{display:none}
-@media(max-height:650px){.card{padding:18px}p{font-size:15px}.moon{font-size:34px}}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.scene{height:94px;display:flex;align-items:center;justify-content:center;font-size:48px;gap:12px}
+.label{font:11px Arial,sans-serif;letter-spacing:2px;color:#cbb8eb;margin:8px 0 12px}
+h1{font-size:clamp(25px,7vw,32px);line-height:1.2;font-weight:normal;color:#ffd5eb;margin:8px 0 18px}
+.message{font-size:17px;line-height:1.8;color:#f4eaf5;white-space:pre-line;margin:0 0 20px}
+button{font-size:14px;font-weight:bold;border:0;border-radius:28px;padding:13px 18px;margin:5px;min-height:44px;cursor:pointer}
+#next{background:linear-gradient(135deg,#ffd0e6,#dca5d7);color:#35172f}
+#back{background:#343451;color:#fff}
+.hidden{display:none!important}
+#progress{font:12px Arial,sans-serif;color:#c9bbdd;margin-top:17px}
+.dots{display:flex;justify-content:center;gap:7px;margin-top:13px}
+.dot{width:6px;height:6px;border-radius:50%;background:#635774}
+.dot.active{background:#ffd1e8;box-shadow:0 0 8px #ffd1e8}
+@media(max-height:650px){.card{padding:17px}.scene{height:60px;font-size:36px}.message{font-size:15px}}
 </style>
 </head>
 <body>
-<div class="stars" id="stars"></div>
-
-<section class="card" id="card">
-  <div class="moon" id="moon">🌙</div>
-  <div class="small" id="label">UMA CARTINHA PARA VOCÊ</div>
-  <h1 id="title">Oi, meu amor…</h1>
-  <p id="message">Fiz uma coisinha para você.
+<div id="sky"></div>
+<main class="card" id="card">
+ <div class="scene" id="scene">🌙 ✦ 🌷</div>
+ <div class="label" id="label">UMA CARTINHA PARA VOCÊ</div>
+ <h1 id="title">Oi, meu amor…</h1>
+ <p class="message" id="message">Fiz uma coisinha para você.
 Não é um jogo qualquer.
 É um pedacinho do meu coração. 💗</p>
-  <button id="next" onclick="advance()">Abrir minha cartinha 💌</button>
-  <button id="back" class="hidden" onclick="previous()">Voltar</button>
-  <div id="progress">Uma história feita com amor 🌷</div>
-</section>
-
+ <div>
+  <button id="back" class="hidden" type="button">← Voltar</button>
+  <button id="next" type="button">Abrir minha cartinha 💌</button>
+ </div>
+ <div class="dots" id="dots"></div>
+ <div id="progress">Uma história feita com amor 🌷</div>
+</main>
 <script>
+(function(){
+"use strict";
 const slides=[
 {
- moon:"🌙",label:"PARA O MEU RICHARD",
- title:"Oi, meu amor…",
- text:"Fiz uma coisinha para você.\nNão é um jogo qualquer.\nÉ um pedacinho do meu coração. 💗",
- button:"Abrir minha cartinha 💌"
+emoji:"🌙",decor:"✦",label:"PARA O MEU RICHARD",
+title:"Oi, meu amor…",
+text:"Fiz uma coisinha para você.\nNão é um jogo qualquer.\nÉ um pedacinho do meu coração. 💗",
+button:"Abrir minha cartinha 💌"
 },
 {
- moon:"☁️",label:"DEPOIS DA TEMPESTADE",
- title:"Se eu pudesse voltar…",
- text:"Eu voltaria àquele momento só para tentar fazer diferente.\n\nÀs vezes, no calor de uma discussão, esquecemos que estamos falando justamente com alguém que amamos tanto.",
- button:"Continuar…"
+emoji:"☁️",decor:"☾",label:"DEPOIS DA TEMPESTADE",
+title:"Se eu pudesse voltar…",
+text:"Eu voltaria àquele momento só para tentar fazer diferente.\n\nÀs vezes, no meio de uma discussão, esquecemos que estamos falando justamente com alguém que amamos tanto.",
+button:"Continuar…"
 },
 {
- moon:"🥀",label:"UMA VERDADE DO MEU CORAÇÃO",
- title:"Eu reconheço meus erros",
- text:"Sinto muito pelas vezes em que minhas atitudes te machucaram.\n\nNão quero continuar repetindo os mesmos erros. Quero aprender, amadurecer e mostrar com atitudes que estou tentando ser melhor.",
- button:"Tem mais uma coisa…"
+emoji:"🥀",decor:"✧",label:"UMA VERDADE DO MEU CORAÇÃO",
+title:"Eu reconheço meus erros",
+text:"Sinto muito pelas vezes em que minhas atitudes te machucaram.\n\nNão quero continuar repetindo os mesmos erros. Quero aprender, amadurecer e mostrar com atitudes que estou tentando ser melhor.",
+button:"Tem mais uma coisa…"
 },
 {
- moon:"💗",label:"O QUE EU QUERO QUE VOCÊ SAIBA",
- title:"Eu amo você",
- text:"Mesmo quando as coisas ficam difíceis, meu amor por você não é algo que eu queira transformar em dor.\n\nQuero que a gente aprenda a conversar, a se entender e a cuidar melhor um do outro.",
- button:"Ver nossa missão 🎮"
+emoji:"💗",decor:"♡",label:"O QUE EU QUERO QUE VOCÊ SAIBA",
+title:"Eu amo você",
+text:"Mesmo quando as coisas ficam difíceis, meu amor por você não é algo que eu queira transformar em dor.\n\nQuero que a gente aprenda a conversar, a se entender e a cuidar melhor um do outro.",
+button:"Continuar 💌"
 },
 {
- moon:"🌌",label:"NOSSA PRÓXIMA FASE",
- title:"Dois corações, dois caminhos",
- text:"Imagine que estamos em lados diferentes de um mundo escuro.\n\nVocê está aí, e eu estou aqui, os dois com saudade e vontade de ficar bem.\n\nAgora você tem uma missão: encontrar o caminho até mim. 🌷",
- button:"Começar nossa aventura ➜"
+emoji:"🌌",decor:"✦",label:"NOSSA PRÓXIMA FASE",
+title:"Dois corações, dois caminhos",
+text:"Imagine que estamos em lados diferentes de um mundo escuro.\n\nVocê está aí, e eu estou aqui, os dois com saudade e vontade de ficar bem.\n\nAgora você tem uma missão: encontrar o caminho até mim. 🌷",
+button:"Ver nossa missão 🎮"
+},
+{
+emoji:"🌅",decor:"☀️",label:"A PRÓXIMA PARTE VEM AÍ",
+title:"Nosso caminho continua…",
+text:"Os primeiros slides terminaram, meu amor. 💗\n\nNa próxima fase, você vai controlar seu personagem, atravessar os obstáculos e encontrar a Luana. Quando vocês se encontrarem, a noite vai se transformar em um dia lindo. ☀️",
+button:"Ler novamente ↺"
 }
 ];
-
 let index=0;
+const $=id=>document.getElementById(id);
 function render(){
  const s=slides[index];
- document.getElementById("moon").textContent=s.moon;
- document.getElementById("label").textContent=s.label;
- document.getElementById("title").textContent=s.title;
- document.getElementById("message").textContent=s.text;
- document.getElementById("next").textContent=s.button;
- document.getElementById("back").classList.toggle("hidden",index===0);
- document.getElementById("progress").textContent=
- "Página "+(index+1)+" de "+slides.length+" · Feito com amor 🌷";
- document.getElementById("card").style.animation="none";
- void document.getElementById("card").offsetWidth;
- document.getElementById("card").style.animation="appear .6s";
+ $("scene").textContent=s.emoji+" "+s.decor+" ♡";
+ $("label").textContent=s.label;
+ $("title").textContent=s.title;
+ $("message").textContent=s.text;
+ $("next").textContent=s.button;
+ $("back").classList.toggle("hidden",index===0);
+ $("progress").textContent="Página "+(index+1)+" de "+slides.length+" · Feito com amor 🌷";
+ $("dots").innerHTML="";
+ slides.forEach((_,i)=>{
+  const d=document.createElement("span");
+  d.className="dot"+(i===index?" active":"");
+  $("dots").appendChild(d);
+ });
+ const card=$("card");
+ card.style.animation="none";
+ void card.offsetWidth;
+ card.style.animation="appear .6s ease";
 }
-function advance(){
- if(index<slides.length-1){
-  index++;render();
- }else{
-  document.getElementById("title").textContent="A aventura vai começar! 🎮";
-  document.getElementById("message").textContent=
-   "Os slides estão prontos! 💗\nNa próxima etapa vamos criar a fase 2D, com você e Richard em lados separados e botões para andar e pular.";
-  document.getElementById("moon").textContent="🌷";
-  document.getElementById("label").textContent="CONTINUA…";
-  document.getElementById("next").textContent="Ler novamente ↺";
-  document.getElementById("next").onclick=()=>{index=0;document.getElementById("next").onclick=advance;render()};
-  document.getElementById("back").classList.remove("hidden");
- }
+$("next").addEventListener("click",()=>{
+ index=index===slides.length-1?0:index+1;
+ render();
+});
+$("back").addEventListener("click",()=>{
+ if(index>0){index--;render();}
+});
+const sky=$("sky");
+for(let i=0;i<70;i++){
+ const e=document.createElement("span");
+ e.className="star";
+ e.textContent=Math.random()>.5?"✦":"·";
+ e.style.left=Math.random()*100+"%";
+ e.style.top=Math.random()*100+"%";
+ e.style.fontSize=7+Math.random()*13+"px";
+ e.style.animationDelay=Math.random()*3+"s";
+ sky.appendChild(e);
 }
-function previous(){if(index>0){index--;render()}}
-const stars=document.getElementById("stars");
-for(let i=0;i<65;i++){
- const el=document.createElement("span");
- el.className="star";el.textContent="✦";
- el.style.left=Math.random()*100+"%";
- el.style.top=Math.random()*100+"%";
- el.style.fontSize=(6+Math.random()*12)+"px";
- el.style.animationDelay=Math.random()*3+"s";
- stars.appendChild(el);
+for(let i=0;i<12;i++){
+ const e=document.createElement("span");
+ e.className="float";
+ e.textContent=["♡","♥","✧","🌸"][i%4];
+ e.style.left=Math.random()*100+"%";
+ e.style.animationDelay=Math.random()*9+"s";
+ e.style.animationDuration=8+Math.random()*7+"s";
+ e.style.fontSize=13+Math.random()*13+"px";
+ sky.appendChild(e);
 }
-for(let i=0;i<10;i++){
- const h=document.createElement("span");
- h.className="heart";h.textContent=["♡","♥","✧"][i%3];
- h.style.left=Math.random()*100+"%";
- h.style.animationDelay=Math.random()*8+"s";
- h.style.animationDuration=(7+Math.random()*6)+"s";
- h.style.color="#f5b9df";
- document.body.appendChild(h);
-}
+render();
+})();
 </script>
 </body>
 </html>
